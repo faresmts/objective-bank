@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Account::class);
-            $table->enum('payment_type', PaymentTypeEnum::cases());
+            $table->enum('payment_type', PaymentTypeEnum::toArray());
             $table->unsignedBigInteger('raw_value');
             $table->unsignedBigInteger('value');
             $table->decimal('fee', 10);

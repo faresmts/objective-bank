@@ -10,7 +10,7 @@ test('create a transfer successfully', function () {
         'balance' => 18000, //in BRL cents
     ]);
 
-    $response = $this->post(route('transfer.store'), [
+    $response = $this->post(route('transfers.store'), [
         'forma_pagamento' => 'P',
         'numero_conta' => $account->number,
         'valor' => $value,
@@ -38,7 +38,7 @@ test('create a pix transfer successfully with fee', function () {
         'balance' => 20000, //in BRL cents
     ]);
 
-    $response = $this->post(route('transfer.store'), [
+    $response = $this->post(route('transfers.store'), [
         'forma_pagamento' => 'P',
         'numero_conta' => $account->number,
         'valor' => $value,
@@ -70,7 +70,7 @@ test('create a credit card transfer successfully with fee', function () {
         'balance' => 20000, //in BRL cents
     ]);
 
-    $response = $this->post(route('transfer.store'), [
+    $response = $this->post(route('transfers.store'), [
         'forma_pagamento' => 'C',
         'numero_conta' => $account->number,
         'valor' => $value,
@@ -102,7 +102,7 @@ test('create a debit card transfer successfully with fee', function () {
         'balance' => 20000, //in BRL cents
     ]);
 
-    $response = $this->post(route('transfer.store'), [
+    $response = $this->post(route('transfers.store'), [
         'forma_pagamento' => 'D',
         'numero_conta' => $account->number,
         'valor' => $value,
@@ -135,7 +135,7 @@ test('is not allowed to create a transfer without an available balance', functio
         'balance' => 10, //in BRL cents
     ]);
 
-    $response = $this->post(route('transfer.store'), [
+    $response = $this->post(route('transfers.store'), [
         'forma_pagamento' => 'P',
         'numero_conta' => $account->number,
         'valor' => $value,

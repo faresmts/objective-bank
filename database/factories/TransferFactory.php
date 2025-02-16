@@ -11,7 +11,7 @@ class TransferFactory extends Factory
     {
         return [
             'account_id' => $this->faker->randomNumber(3),
-            'payment_type' => $this->faker->randomElement(PaymentTypeEnum::cases()),
+            'payment_type' => $this->faker->randomElement(PaymentTypeEnum::toArray()),
             'raw_value' => $this->faker->randomFloat(2, 0, 100000),
             'value' => $this->faker->randomFloat(2, 0, 100000),
             'fee' => $this->faker->randomFloat(2, 0, 100000),

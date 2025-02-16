@@ -17,7 +17,7 @@ class Account extends Model
 
     public function getFormattedBalanceAttribute(): string
     {
-        return number_format($this->balance, 2, ',', '.');
+        return $this->balance / 100;
     }
 
     public function transfers(): HasMany
