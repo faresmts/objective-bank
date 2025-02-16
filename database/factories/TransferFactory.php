@@ -2,22 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Enums\PaymentTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transfer>
- */
 class TransferFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'account_id' => $this->faker->randomNumber(3),
+            'payment_type' => $this->faker->randomElement(PaymentTypeEnum::cases()),
+            'raw_value' => $this->faker->randomFloat(2, 0, 100000),
+            'value' => $this->faker->randomFloat(2, 0, 100000),
+            'fee' => $this->faker->randomFloat(2, 0, 100000),
         ];
     }
 }

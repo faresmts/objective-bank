@@ -24,9 +24,9 @@ test('create a transfer successfully', function () {
 
     $this->assertDatabaseCount('transfers', 1);
     $this->assertDatabaseHas('transfers', [
-        'forma_pagamento' => 'P',
-        'numero_conta' => $account->number,
-        'valor' => $value * 100 //convert to BRL cents,
+        'payment_type' => 'P',
+        'account_id' => $account->id,
+        'value' => $value * 100 //convert to BRL cents,
     ]);
 });
 
@@ -52,9 +52,9 @@ test('create a pix transfer successfully with fee', function () {
 
     $this->assertDatabaseCount('transfers', 1);
     $this->assertDatabaseHas('transfers', [
-        'forma_pagamento' => 'P',
-        'numero_conta' => $account->number,
-        'valor' => $value * 100 //convert to BRL cents,
+        'payment_type' => 'P',
+        'account_id' => $account->id,
+        'value' => $value * 100 //convert to BRL cents,
     ]);
     $this->assertDatabaseHas('accounts', [
         'numero_conta' => $account->number,
@@ -84,9 +84,9 @@ test('create a credit card transfer successfully with fee', function () {
 
     $this->assertDatabaseCount('transfers', 1);
     $this->assertDatabaseHas('transfers', [
-        'forma_pagamento' => 'C',
-        'numero_conta' => $account->number,
-        'valor' => $value * 100 * 1.05 //convert to BRL cents with fee
+        'payment_type' => 'C',
+        'account_id' => $account->id,
+        'value' => $value * 100 * 1.05 //convert to BRL cents with fee
     ]);
     $this->assertDatabaseHas('accounts', [
         'numero_conta' => $account->number,
@@ -116,9 +116,9 @@ test('create a debit card transfer successfully with fee', function () {
 
     $this->assertDatabaseCount('transfers', 1);
     $this->assertDatabaseHas('transfers', [
-        'forma_pagamento' => 'D',
-        'numero_conta' => $account->number,
-        'valor' => $value * 100 * 1.03 //convert to BRL cents with fee
+        'payment_type' => 'D',
+        'account_id' => $account->id,
+        'value' => $value * 100 * 1.03 //convert to BRL cents with fee
     ]);
 
     $this->assertDatabaseHas('accounts', [
