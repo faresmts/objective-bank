@@ -57,8 +57,8 @@ test('create a pix transfer successfully with fee', function () {
         'value' => $value * 100 //convert to BRL cents,
     ]);
     $this->assertDatabaseHas('accounts', [
-        'numero_conta' => $account->number,
-        'saldo' => 180.00,
+        'number' => $account->number,
+        'balance' => 18000,
     ]);
 });
 
@@ -89,8 +89,8 @@ test('create a credit card transfer successfully with fee', function () {
         'value' => $value * 100 * 1.05 //convert to BRL cents with fee
     ]);
     $this->assertDatabaseHas('accounts', [
-        'numero_conta' => $account->number,
-        'saldo' => (200.00 - ($value * 1.05)), // 5% fee
+        'number' => $account->number,
+        'balance' => (200.00 - ($value * 1.05)) * 100, // 5% fee
     ]);
 });
 
@@ -122,8 +122,8 @@ test('create a debit card transfer successfully with fee', function () {
     ]);
 
     $this->assertDatabaseHas('accounts', [
-        'numero_conta' => $account->number,
-        'saldo' => (200.00 - ($value * 1.03)), // 3% fee
+        'number' => $account->number,
+        'balance' => (200.00 - ($value * 1.03)) * 100, // 3% fee
     ]);
 });
 

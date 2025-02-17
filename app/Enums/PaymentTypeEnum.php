@@ -16,4 +16,9 @@ enum PaymentTypeEnum: string
             self::PIX->value,
         ];
     }
+
+    public static function validationString(): string
+    {
+        return implode(',', self::toArray());
+    }
 }

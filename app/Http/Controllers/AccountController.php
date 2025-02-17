@@ -5,37 +5,32 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ShowAccountRequest;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Resources\AccountResource;
-use App\Models\Account;
+use Domain\Account\AccountService;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends Controller
 {
+    public function __construct(
+        public AccountService $service
+    ){}
+
     public function store(StoreAccountRequest $request): JsonResponse
     {
-        $data = $request->validated();
-        $balance = $data['saldo'] * 100;
-
-        $data = Account::query()
-            ->create([
-                'number' => $data['numero_conta'],
-                'balance' => (int) $balance,
-            ]);
-
         return response()->json(
-            AccountResource::make($data),
-            201
+            AccountResource::make(
+                $this->service->storeAccount($request->validated())
+            ),
+            Response::HTTP_CREATED
         );
     }
 
     public function show(ShowAccountRequest $request): JsonResponse
     {
-        $data = $request->validated();
-        $account = Account::query()
-            ->where('number', $data['numero_conta'])
-            ->first();
-
         return response()->json(
-            AccountResource::make($account),
+            AccountResource::make(
+                $this->service->findAccount($request->validated())
+            ),
         );
     }
 }
